@@ -1,0 +1,2 @@
+# ignora directory e sottodirectory della cartella target
+/Miner/target/**/*
