@@ -21,7 +21,7 @@ public class Block {
     private String merkleRoot;
     private String hashPreviousBlock;
     private String minerPublicKey;
-    private int nonce;
+    private String nonce;
     private String proofOfWork;
     
     public Block(String hashBlock,String timestamp,String mr,String hpb,String mpk,int nonce,String pow,List<Transaction> tr){
