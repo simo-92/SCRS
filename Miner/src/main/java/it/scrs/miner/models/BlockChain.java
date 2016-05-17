@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
-
+package it.scrs.miner.models;
+import java.util.ArrayList;
+import java.util.List;
 public class BlockChain<T extends Block> {
     
-   /* private Node<T> root;
+    private Node<T> root;
 
-    public Tree(T rootData) {
+    public BlockChain(T rootData) {
         root = new Node<T>();
         root.data = rootData;
         root.children = new ArrayList<Node<T>>();
@@ -19,7 +20,7 @@ public class BlockChain<T extends Block> {
         private T data;
         private Node<T> parent;
         private List<Node<T>> children;
-    }*/
+    }
 }
  
 
