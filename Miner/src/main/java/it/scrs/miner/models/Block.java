@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Block {
     
-    private String id;
+    private String hashBlock;    //Costituisce l'id del blocco, per essere identificato in maniera UNIVOCA nella blockchain
     private String timestamp;
     private List<Transaction> transactions;
     private String merkleRoot;
@@ -24,8 +24,8 @@ public class Block {
     private int nonce;
     private String proofOfWork;
     
-    public Block(String id,String timestamp,String mr,String hpb,String mpk,int nonce,String pow,List<Transaction> tr){
-        this.id=id;
+    public Block(String hashBlock,String timestamp,String mr,String hpb,String mpk,int nonce,String pow,List<Transaction> tr){
+        this.hashBlock=hashBlock;
         this.timestamp=timestamp;
         this.transactions=tr;
         this.merkleRoot=mr;
@@ -35,12 +35,12 @@ public class Block {
         this.proofOfWork=pow;
     }
 
-    public String getId() {
-        return id;
+    public String getHashBlock() {
+        return hashBlock;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setHashBlock(String hashBlock) {
+        this.hashBlock = hashBlock;
     }
 
     public String getTimestamp() {
