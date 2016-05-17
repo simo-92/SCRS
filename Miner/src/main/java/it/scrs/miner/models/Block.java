@@ -23,8 +23,9 @@ public class Block {
     private String minerPublicKey;
     private String nonce;
     private String proofOfWork;
+    private int level;
     
-    public Block(String hashBlock,String timestamp,String mr,String hpb,String mpk,String nonce,String pow,List<Transaction> tr){
+    public Block(String hashBlock,String timestamp,String mr,String hpb,String mpk,String nonce,String pow,List<Transaction> tr, int level){
         this.hashBlock=hashBlock;
         this.timestamp=timestamp;
         this.transactions=tr;
@@ -33,6 +34,7 @@ public class Block {
         this.minerPublicKey=mpk;
         this.nonce=nonce;
         this.proofOfWork=pow;
+        this.level = level;
     }
 
     public String getHashBlock() {
@@ -97,6 +99,14 @@ public class Block {
 
     public void setProofOfWork(String proofOfWork) {
         this.proofOfWork = proofOfWork;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
     
     
