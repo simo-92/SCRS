@@ -11,7 +11,7 @@ package it.scrs.miner.models;
  */
 public class User {
     private String publicKey;
-    private String privatekey;
+    //private String privatekey;
     private String name;
     private String lastName;
     private String email;
@@ -19,7 +19,7 @@ public class User {
 
     public User(String puK, String prK, String name, String lname, String email, String usr ){
         this.publicKey =puK;
-        this.privatekey = prK;
+        //this.privatekey = prK;
         this.name=name;
         this.lastName=lname;
         this.email=email;
@@ -34,13 +34,13 @@ public class User {
         this.publicKey = publicKey;
     }
 
-    public String getPrivatekey() {
-        return privatekey;
-    }
-
-    public void setPrivatekey(String privatekey) {
-        this.privatekey = privatekey;
-    }
+//    public String getPrivatekey() {
+//        return privatekey;
+//    }
+//
+//    public void setPrivatekey(String privatekey) {
+//        this.privatekey = privatekey;
+//    }
 
     public String getName() {
         return name;
