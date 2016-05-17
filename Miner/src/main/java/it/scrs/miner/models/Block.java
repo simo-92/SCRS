@@ -24,7 +24,7 @@ public class Block {
     private String nonce;
     private String proofOfWork;
     
-    public Block(String hashBlock,String timestamp,String mr,String hpb,String mpk,int nonce,String pow,List<Transaction> tr){
+    public Block(String hashBlock,String timestamp,String mr,String hpb,String mpk,String nonce,String pow,List<Transaction> tr){
         this.hashBlock=hashBlock;
         this.timestamp=timestamp;
         this.transactions=tr;
@@ -83,11 +83,11 @@ public class Block {
         this.minerPublicKey = minerPublicKey;
     }
 
-    public int getNonce() {
+    public String getNonce() {
         return nonce;
     }
 
-    public void setNonce(int nonce) {
+    public void setNonce(String nonce) {
         this.nonce = nonce;
     }
 
