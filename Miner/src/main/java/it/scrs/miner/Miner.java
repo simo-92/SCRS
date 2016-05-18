@@ -46,8 +46,9 @@ public class Miner {
         Block block;
         block = (Block) session.createCriteria(Block.class).uniqueResult();
         System.out.println(block.getHashBlock());
-
-         
+        session.getTransaction().commit();
+        session.close();
+        StandardServiceRegistryBuilder.destroy(se.getSessionFactoryOptions().getServiceRegistry());
     }
     
     
