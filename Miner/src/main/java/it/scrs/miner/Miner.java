@@ -28,6 +28,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.registry.internal.StandardServiceRegistryImpl;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.MetadataSource;
 
@@ -51,7 +52,10 @@ public class Miner {
 //        block = (Block) session.createCriteria(Block.class).uniqueResult();
 //        System.out.println(block.getHashBlock());
         Criteria crit=session.createCriteria(Block.class);
-        crit=crit.add(Restrictions.eq("level", 3));
+        crit=(Criteria) crit.addOrder(Order.desc("level"))
+                            .setMaxResults(1);
+                            
+
         Block block = (Block) crit.uniqueResult();
         System.out.println(block.getHashBlock());
         Block nested=block.getPreviuosBlock();
