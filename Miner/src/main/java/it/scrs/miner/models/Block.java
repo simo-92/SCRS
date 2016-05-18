@@ -10,8 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -33,7 +32,7 @@ public class Block {
     //private List<Transaction> transactions;
     @Column(name="merkleRoot")
     private String merkleRoot;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="hashPreviousBlock")
     private Block previuosBlock;
 //    @Column(name="hashPreviousBlock")

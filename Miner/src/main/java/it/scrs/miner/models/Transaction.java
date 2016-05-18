@@ -5,11 +5,15 @@
  */
 package it.scrs.miner.models;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,21 +27,24 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name="author")
     private User author;
-    private final int k= 50;
+   // private final int k= 50;
     @ManyToOne
+    @JoinColumn(name="blockId")
     private Block blockContainer; //è il blocco che contiene la transazione
+    @OneToOne
+    @JoinColumn(name="hashNextTransaction")
+    private Transaction nextTransaction;
     
-    private String[] citations = new String[k];
-    private boolean continues; // true se è il primo blocco altrimenti continua le citazioni di un altra transazione
+    @ManyToMany
+    @JoinTable(name="citation",joinColumns={
+        @JoinColumn(name="citing")}, inverseJoinColumns={
+        @JoinColumn(name="cited")
+    })
+    private List<Transaction> citations;
+  //  private boolean continues; // true se è il primo blocco altrimenti continua le citazioni di un altra transazione
     
     public Transaction(){}
-    public Transaction(String hashFile,String filename, User author,String[] citations,boolean b){
-        this.hashFile = hashFile;
-        this.filename = filename;
-        this.author = author;
-        this.citations = citations;
-        this.continues=b;
-    }
+    
 
     public String getHashFile() {
         return hashFile;
@@ -63,25 +70,55 @@ public class Transaction {
         this.author = author;
     }
 
-    public int getK() {
-        return k;
-    }
+//    public int getK() {
+//        return k;
+//    }
 
-    public String[] getCitations() {
+    public List<Transaction> getCitations() {
         return citations;
     }
 
-    public void setCitations(String[] citations) {
-        this.citations = citations;
+    public void setCitations(List<Transaction> citations) {
+        this.citations=citations;
     }
 
-    public boolean isContinues() {
-        return continues;
+//    public boolean isContinues() {
+//        return continues;
+//    }
+//
+//    public void setContinues(boolean continues) {
+//        this.continues = continues;
+//    }
+
+    /**
+     * @return the blockContainer
+     */
+    public Block getBlockContainer() {
+        return blockContainer;
     }
 
-    public void setContinues(boolean continues) {
-        this.continues = continues;
+    /**
+     * @param blockContainer the blockContainer to set
+     */
+    public void setBlockContainer(Block blockContainer) {
+        this.blockContainer = blockContainer;
     }
+
+    /**
+     * @return the nextTransaction
+     */
+    public Transaction getNextTransaction() {
+        return nextTransaction;
+    }
+
+    /**
+     * @param nextTransaction the nextTransaction to set
+     */
+    public void setNextTransaction(Transaction nextTransaction) {
+        this.nextTransaction = nextTransaction;
+    }
+
+  
       
       
 }

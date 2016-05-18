@@ -16,21 +16,16 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import it.scrs.miner.models.Pairs;
-import it.scrs.miner.models.User;
+import it.scrs.miner.models.Transaction;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.boot.registry.internal.StandardServiceRegistryImpl;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.mapping.MetadataSource;
 
 public class Miner {
     
@@ -51,19 +46,22 @@ public class Miner {
 //        Block block;
 //        block = (Block) session.createCriteria(Block.class).uniqueResult();
 //        System.out.println(block.getHashBlock());
-        Criteria crit=session.createCriteria(Block.class);
-        crit=(Criteria) crit.addOrder(Order.desc("level"))
-                            .setMaxResults(1);
-                            
-
-        Block block = (Block) crit.uniqueResult();
-        System.out.println(block.getHashBlock());
-        Block nested=block.getPreviuosBlock();
-        System.out.println(nested.getHashBlock());
-        Block pre=nested.getPreviuosBlock();
-        System.out.println(pre.getHashBlock());
-        Block prepre=pre.getPreviuosBlock();
-        System.out.println(prepre.getHashBlock());
+//        Criteria crit=session.createCriteria(Block.class);
+//        crit=(Criteria) crit.addOrder(Order.desc("level"))
+//                            .setMaxResults(1);
+//                            
+//
+//        Block block = (Block) crit.uniqueResult();
+//        System.out.println(block.getHashBlock());
+//        Block nested=block.getPreviuosBlock();
+//        System.out.println(nested.getHashBlock());
+//        Block pre=nested.getPreviuosBlock();
+//        System.out.println(pre.getHashBlock());
+//        Block prepre=pre.getPreviuosBlock();
+//        System.out.println(prepre.getHashBlock());
+        Transaction trans;
+        trans=(Transaction) session.createCriteria(Transaction.class).add(Restrictions.eq("hashFile","hfile1")).uniqueResult();
+        
         session.getTransaction().commit();
         session.close();
         StandardServiceRegistryBuilder.destroy(se.getSessionFactoryOptions().getServiceRegistry());
