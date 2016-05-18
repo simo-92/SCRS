@@ -18,6 +18,11 @@ import org.hibernate.criterion.Order;
  */
 public class BlockDAO {
     private Session session;
+    private static BlockDAO dao;
+    
+    private BlockDAO(){
+        
+    }
     public Block getLastBlock(){
         session=DbSession.getSession();
         session.beginTransaction();
@@ -29,5 +34,11 @@ public class BlockDAO {
         block=(Block) crit.uniqueResult();
         session.close();
         return block;
+    }
+    
+    public static BlockDAO getBlockDAO(){
+        if(dao==null)
+            dao=new BlockDAO();
+        return dao;
     }
 }

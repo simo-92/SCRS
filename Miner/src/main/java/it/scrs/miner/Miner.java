@@ -53,7 +53,7 @@ public class Miner {
 //        System.out.println(pre.getHashBlock());
 //        Block prepre=pre.getPreviuosBlock();
 //        System.out.println(prepre.getHashBlock());
-        System.out.println(new BlockDAO().getLastBlock().getHashBlock());
+        System.out.println(BlockDAO.getBlockDAO().getLastBlock().getHashBlock());
 //        Transaction trans;
 //        trans=(Transaction) session.createCriteria(Transaction.class).add(Restrictions.eq("hashFile","hfile1")).uniqueResult();
 //        
