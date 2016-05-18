@@ -5,13 +5,29 @@
  */
 package it.scrs.miner.dao;
 
+import it.scrs.miner.models.Block;
+import it.scrs.miner.util.DbSession;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 
 /**
  *
  * @author giordanocristini
  */
 public class BlockDAO {
-    
-    
+    private Session session;
+    public Block getLastBlock(){
+        session=DbSession.getSession();
+        session.beginTransaction();
+        Block block;
+      
+        Criteria crit=session.createCriteria(Block.class);
+        crit=(Criteria) crit.addOrder(Order.desc("level"))
+                            .setMaxResults(1);
+        block=(Block) crit.uniqueResult();
+        session.close();
+        return block;
+    }
 }

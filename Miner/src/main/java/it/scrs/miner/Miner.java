@@ -6,6 +6,7 @@
 package it.scrs.miner;
 
 import com.google.gson.reflect.TypeToken;
+import it.scrs.miner.dao.BlockDAO;
 import it.scrs.miner.models.Block;
 import it.scrs.miner.util.HttpUtil;
 import it.scrs.miner.util.JsonUtility;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Properties;
 import it.scrs.miner.models.Pairs;
 import it.scrs.miner.models.Transaction;
+import it.scrs.miner.util.DbSession;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -39,16 +41,8 @@ public class Miner {
         Miner miner = new Miner();
         miner.loadNetworkConfig();
        // miner.firstConnectToEntryPoint();
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-        SessionFactory se = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        Session session=se.openSession();
-        session.beginTransaction();
-//        Block block;
-//        block = (Block) session.createCriteria(Block.class).uniqueResult();
-//        System.out.println(block.getHashBlock());
-//        Criteria crit=session.createCriteria(Block.class);
-//        crit=(Criteria) crit.addOrder(Order.desc("level"))
-//                            .setMaxResults(1);
+       
+      
 //                            
 //
 //        Block block = (Block) crit.uniqueResult();
@@ -59,12 +53,16 @@ public class Miner {
 //        System.out.println(pre.getHashBlock());
 //        Block prepre=pre.getPreviuosBlock();
 //        System.out.println(prepre.getHashBlock());
-        Transaction trans;
-        trans=(Transaction) session.createCriteria(Transaction.class).add(Restrictions.eq("hashFile","hfile1")).uniqueResult();
-        
-        session.getTransaction().commit();
-        session.close();
-        StandardServiceRegistryBuilder.destroy(se.getSessionFactoryOptions().getServiceRegistry());
+        System.out.println(new BlockDAO().getLastBlock().getHashBlock());
+//        Transaction trans;
+//        trans=(Transaction) session.createCriteria(Transaction.class).add(Restrictions.eq("hashFile","hfile1")).uniqueResult();
+//        
+//        session.getTransaction().commit();
+//        //Transaction trans;
+//       // trans=(Transaction) se.getCurrentSession().createCriteria(Transaction.class).add(Restrictions.eq("hashFile","hfile1")).uniqueResult();
+//        
+//        session.close();
+        DbSession.destroyService();
     }
     
     
