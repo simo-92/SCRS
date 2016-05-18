@@ -5,16 +5,32 @@
  */
 package it.scrs.miner.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="transaction")
 public class Transaction {
-      
+    @Id
+    @Column(name="hashFile")
     private String hashFile;
+    @Column(name="filename")
     private String filename;
+    @ManyToOne
+    @JoinColumn(name="author")
     private User author;
     private final int k= 50;
+    @ManyToOne
+    private Block blockContainer; //è il blocco che contiene la transazione
+    
     private String[] citations = new String[k];
     private boolean continues; // true se è il primo blocco altrimenti continua le citazioni di un altra transazione
     
-    
+    public Transaction(){}
     public Transaction(String hashFile,String filename, User author,String[] citations,boolean b){
         this.hashFile = hashFile;
         this.filename = filename;

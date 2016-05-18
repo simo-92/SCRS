@@ -19,12 +19,14 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.scrs.miner.models.Pairs;
+import it.scrs.miner.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.registry.internal.StandardServiceRegistryImpl;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.MetadataSource;
 
 public class Miner {
@@ -46,6 +48,10 @@ public class Miner {
         Block block;
         block = (Block) session.createCriteria(Block.class).uniqueResult();
         System.out.println(block.getHashBlock());
+        
+        User user;
+        user=(User) session.createCriteria(User.class).add(Restrictions.eq("name", "poc")).uniqueResult();
+        System.out.println(user==null ? "null" : user.getPublicKey());
         session.getTransaction().commit();
         session.close();
         StandardServiceRegistryBuilder.destroy(se.getSessionFactoryOptions().getServiceRegistry());

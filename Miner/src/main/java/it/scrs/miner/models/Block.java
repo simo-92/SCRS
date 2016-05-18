@@ -9,6 +9,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -30,8 +32,10 @@ public class Block {
     //private List<Transaction> transactions;
     @Column(name="merkleRoot")
     private String merkleRoot;
-    @Column(name="hashPreviousBlock")
-    private String hashPreviousBlock;
+    @OneToMany
+    private Block previuosBlock;
+//    @Column(name="hashPreviousBlock")
+//    private String hashPreviousBlock;
     @Column(name="minerPublickey")
     private String minerPublicKey;
     @Column(name="nonce")
@@ -48,7 +52,7 @@ public class Block {
         this.timestamp=timestamp;
         //this.transactions=tr;
         this.merkleRoot=mr;
-        this.hashPreviousBlock=hpb;
+        //this.hashPreviousBlock=hpb;
         this.minerPublicKey=mpk;
         this.nonce=nonce;
     }
@@ -85,13 +89,13 @@ public class Block {
         this.merkleRoot = merkleRoot;
     }
 
-    public String getHashPreviousBlock() {
-        return hashPreviousBlock;
-    }
-
-    public void setHashPreviousBlock(String hashPreviousBlock) {
-        this.hashPreviousBlock = hashPreviousBlock;
-    }
+//    public String getHashPreviousBlock() {
+//        return hashPreviousBlock;
+//    }
+//
+//    public void setHashPreviousBlock(String hashPreviousBlock) {
+//        this.hashPreviousBlock = hashPreviousBlock;
+//    }
 
     public String getMinerPublicKey() {
         return minerPublicKey;

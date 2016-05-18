@@ -24,5 +24,6 @@
     <!-- Drop and re-create the database schema on startup -->
     <!-- Names the annotated entity class -->
     <mapping class="it.scrs.miner.models.Block"/>
+    <mapping class="it.scrs.miner.models.User"/>
   </session-factory>
 </hibernate-configuration>

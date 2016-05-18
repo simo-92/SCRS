@@ -5,18 +5,37 @@
  */
 package it.scrs.miner.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  *
  * @author alebus
  */
+@Entity
+@Table(name="user")
 public class User {
+    @Id
+    @Column(name="publicKeyHash")
+    private String publicKeyHash;
+    @Column(name="publicKey")
     private String publicKey;
     //private String privatekey;
+    @Column(name="name")
     private String name;
+    @Column(name="lastname")
     private String lastName;
+    @Column(name="email")
     private String email;
+    @Column(name="username")
     private String username;
-
+    
+    
+    public User(){}
     public User(String puK, String prK, String name, String lname, String email, String usr ){
         this.publicKey =puK;
         //this.privatekey = prK;
