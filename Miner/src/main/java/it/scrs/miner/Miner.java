@@ -6,6 +6,7 @@
 package it.scrs.miner;
 
 import com.google.gson.reflect.TypeToken;
+import it.scrs.miner.models.Block;
 import it.scrs.miner.util.HttpUtil;
 import it.scrs.miner.util.JsonUtility;
 import java.io.IOException;
@@ -18,6 +19,13 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.scrs.miner.models.Pairs;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.boot.registry.internal.StandardServiceRegistryImpl;
+import org.hibernate.mapping.MetadataSource;
 
 public class Miner {
     
@@ -30,7 +38,15 @@ public class Miner {
         //TODO avviare gui
         Miner miner = new Miner();
         miner.loadNetworkConfig();
-        miner.firstConnectToEntryPoint();
+       // miner.firstConnectToEntryPoint();
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory se = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session=se.openSession();
+        session.beginTransaction();
+        Block block;
+        block = (Block) session.createCriteria(Block.class).uniqueResult();
+        System.out.println(block.getHashBlock());
+
          
     }
     
@@ -56,7 +72,7 @@ public class Miner {
             localIp=InetAddress.getLocalHost().getHostAddress();
             result = HttpUtil.doPost(url,new Pairs("ip",localIp));
         } catch (Exception ex) {
-            Logger.getLogger(Miner.class.getName()).log(Level.SEVERE, null, ex);
+             ex.printStackTrace();
         }
         Type type;
         type = new TypeToken<ArrayList<String>>(){}.getType();

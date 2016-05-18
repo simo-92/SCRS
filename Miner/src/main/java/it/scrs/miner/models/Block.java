@@ -6,6 +6,10 @@
 package it.scrs.miner.models;
 
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 
@@ -13,28 +17,40 @@ import java.util.List;
  *
  * @author alebus
  */
+
+@Entity
+@Table(name="block")
 public class Block {
-    
+    @Id
+    @Column(name="hashBlock")
     private String hashBlock;    //Costituisce l'id del blocco, per essere identificato in maniera UNIVOCA nella blockchain
+    @Column(name="timestamp")
     private String timestamp;
-    private List<Transaction> transactions;
+  
+    //private List<Transaction> transactions;
+    @Column(name="merkleRoot")
     private String merkleRoot;
+    @Column(name="hashPreviousBlock")
     private String hashPreviousBlock;
+    @Column(name="minerPublickey")
     private String minerPublicKey;
+    @Column(name="nonce")
     private String nonce;
-    private String proofOfWork;
+    @Column(name="level")
     private int level;
     
-    public Block(String hashBlock,String timestamp,String mr,String hpb,String mpk,String nonce,String pow,List<Transaction> tr, int level){
+    public Block(){
+        
+    }
+    
+    public Block(String hashBlock,String timestamp,String mr,String hpb,String mpk,String nonce,List<Transaction> tr){
         this.hashBlock=hashBlock;
         this.timestamp=timestamp;
-        this.transactions=tr;
+        //this.transactions=tr;
         this.merkleRoot=mr;
         this.hashPreviousBlock=hpb;
         this.minerPublicKey=mpk;
         this.nonce=nonce;
-        this.proofOfWork=pow;
-        this.level = level;
     }
 
     public String getHashBlock() {
@@ -52,7 +68,7 @@ public class Block {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-
+/*
     public List<Transaction> getTransactions() {
         return transactions;
     }
@@ -60,7 +76,7 @@ public class Block {
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
-
+*/
     public String getMerkleRoot() {
         return merkleRoot;
     }
@@ -93,21 +109,7 @@ public class Block {
         this.nonce = nonce;
     }
 
-    public String getProofOfWork() {
-        return proofOfWork;
-    }
-
-    public void setProofOfWork(String proofOfWork) {
-        this.proofOfWork = proofOfWork;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
+  
     
     
 }
