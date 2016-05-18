@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,7 +33,8 @@ public class Block {
     //private List<Transaction> transactions;
     @Column(name="merkleRoot")
     private String merkleRoot;
-    @OneToMany
+    @OneToOne
+    @JoinColumn(name="hashPreviousBlock")
     private Block previuosBlock;
 //    @Column(name="hashPreviousBlock")
 //    private String hashPreviousBlock;
@@ -111,6 +113,20 @@ public class Block {
 
     public void setNonce(String nonce) {
         this.nonce = nonce;
+    }
+
+    /**
+     * @return the previuosBlock
+     */
+    public Block getPreviuosBlock() {
+        return previuosBlock;
+    }
+
+    /**
+     * @param previuosBlock the previuosBlock to set
+     */
+    public void setPreviuosBlock(Block previuosBlock) {
+        this.previuosBlock = previuosBlock;
     }
 
   
