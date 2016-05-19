@@ -7,6 +7,7 @@ package it.scrs.miner;
 
 import com.google.gson.reflect.TypeToken;
 import it.scrs.miner.dao.BlockDAO;
+import it.scrs.miner.gui.MinerGUI;
 import it.scrs.miner.models.Block;
 import it.scrs.miner.util.HttpUtil;
 import it.scrs.miner.util.JsonUtility;
@@ -20,6 +21,7 @@ import java.util.Properties;
 import it.scrs.miner.models.Pairs;
 import it.scrs.miner.models.Transaction;
 import it.scrs.miner.util.DbSession;
+import javax.swing.SwingUtilities;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,11 +37,14 @@ public class Miner {
     private String portEntryPoint;
     private String entryPointBaseUri;
     private List<String> ipPeers; // contiene gli ip degli altri miner nella rete
-    
+    private MinerGUI gui;
     public static void main(String args[]){
         //TODO avviare gui
+
         Miner miner = new Miner();
-        miner.loadNetworkConfig();
+        MinerGUI gui = new MinerGUI(miner);            
+
+        //miner.loadNetworkConfig();
        // miner.firstConnectToEntryPoint();
        
       
@@ -53,7 +58,7 @@ public class Miner {
 //        System.out.println(pre.getHashBlock());
 //        Block prepre=pre.getPreviuosBlock();
 //        System.out.println(prepre.getHashBlock());
-        System.out.println(BlockDAO.getBlockDAO().getLastBlock().getHashBlock());
+       // System.out.println(BlockDAO.getBlockDAO().getLastBlock().getHashBlock());
 //        Transaction trans;
 //        trans=(Transaction) session.createCriteria(Transaction.class).add(Restrictions.eq("hashFile","hfile1")).uniqueResult();
 //        
@@ -62,7 +67,7 @@ public class Miner {
 //       // trans=(Transaction) se.getCurrentSession().createCriteria(Transaction.class).add(Restrictions.eq("hashFile","hfile1")).uniqueResult();
 //        
 //        session.close();
-        DbSession.destroyService();
+       // DbSession.destroyService();
     }
     
     
