@@ -6,6 +6,8 @@
 package it.scrs.miner.gui;
 
 import it.scrs.miner.Miner;
+import it.scrs.miner.dao.BlockDAO;
+import it.scrs.miner.models.Block;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,30 +56,32 @@ public class MinerGUI extends JFrame {
         }
         
     }
-    private class MinRunnable implements Runnable{
+    private class MinRunnable implements Runnable {
 
         
-        private boolean run=true;
+        private boolean run = true;
 
-        public void stop(){
-            run=false;
+        public void stop() {
+            run = false;
         }
 
         @Override
         public void run() {
                  start.setEnabled(false);
                  miner.loadNetworkConfig();
-                 boolean connected=miner.firstConnectToEntryPoint();
+                 Block b= (BlockDAO.getBlockDAO().getLastBlock());                 
+                 boolean connected = miner.firstConnectToEntryPoint();
                  System.out.println(connected);
-                 while(run){
-                     System.out.println("quokkadio");
+                 while(run) {
+                     System.out.println("SCRS 2016");
                  }               
         }
+        
     }
 
         
     
-    private class MinerStop implements ActionListener{
+    private class MinerStop implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {

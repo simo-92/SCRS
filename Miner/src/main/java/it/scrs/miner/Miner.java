@@ -93,6 +93,7 @@ public class Miner {
             result = HttpUtil.doPost(url,new Pairs("ip",localIp));
         } catch (Exception ex) {
              ex.printStackTrace();
+             return false;
         }
         Type type;
         type = new TypeToken<ArrayList<String>>(){}.getType();
