@@ -21,6 +21,10 @@ import java.util.Properties;
 import it.scrs.miner.models.Pairs;
 import it.scrs.miner.models.Transaction;
 import it.scrs.miner.util.DbSession;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 import javax.swing.SwingUtilities;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -38,6 +42,9 @@ public class Miner {
     private String entryPointBaseUri;
     private List<String> ipPeers; // contiene gli ip degli altri miner nella rete
     private MinerGUI gui;
+    private Block lastBlock;
+    private List<Transaction> transactionsList;
+    
     public static void main(String args[]){
         //TODO avviare gui
 
@@ -68,6 +75,38 @@ public class Miner {
 //        
 //        session.close();
        // DbSession.destroyService();
+    }
+    
+    public void loadBlockChain() {
+        Block lastGivenBlock = null;
+        int index = new Random().nextInt(ipPeers.size());
+            String url = "http://" + ipPeers.get(index) + ":" + 9100;
+            String result = "";
+            try {
+                result = HttpUtil.doPost(url,new Pairs("comand","getAllBlockChain"), new Pairs("last", lastBlock.getHashBlock()));
+                Type type;
+                type = new TypeToken<Block>() {
+                }.getType();
+                lastGivenBlock = ((Block) JsonUtility.fromJson(result, type));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        //TODO Provare a scaricare da un secondo Peer e vedere se c'e' qualcosa di nuovo
+        if(lastGivenBlock != null){
+            lastBlock = lastGivenBlock;
+        }
+        url = "http://" + ipPeers.get(index) + ":" + 9100 + "/getAllTransactions";
+        result = "";
+        try {
+                result = HttpUtil.doGet(url);
+                Type type;
+                type = new TypeToken<Block>() {
+                }.getType();
+                lastGivenBlock = ((Block) JsonUtility.fromJson(result, type));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        
     }
     
     
