@@ -21,6 +21,10 @@ import java.util.Properties;
 import it.scrs.miner.models.Pairs;
 import it.scrs.miner.models.Transaction;
 import it.scrs.miner.util.DbSession;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.Socket;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
@@ -45,11 +49,12 @@ public class Miner {
     private Block lastBlock;
     private List<Transaction> transactionsList;
     
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException{
         //TODO avviare gui
 
         Miner miner = new Miner();
-        MinerGUI gui = new MinerGUI(miner);            
+        miner.loadBlockChain();
+        //MinerGUI gui = new MinerGUI(miner);            
 
         //miner.loadNetworkConfig();
        // miner.firstConnectToEntryPoint();
@@ -77,35 +82,41 @@ public class Miner {
        // DbSession.destroyService();
     }
     
-    public void loadBlockChain() {
+    public void loadBlockChain() throws IOException {
         Block lastGivenBlock = null;
-        int index = new Random().nextInt(ipPeers.size());
-            String url = "http://" + ipPeers.get(index) + ":" + 9100;
+        //int index = new Random().nextInt(ipPeers.size());
+            String ip = "160.80.216.205";
             String result = "";
+            Socket conn=new Socket(ip,9100);
+            BufferedReader res = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            DataOutputStream outStream = new DataOutputStream(conn.getOutputStream());
+            
             try {
-                result = HttpUtil.doPost(url,new Pairs("comand","getAllBlockChain"), new Pairs("last", lastBlock.getHashBlock()));
-                Type type;
-                type = new TypeToken<Block>() {
-                }.getType();
-                lastGivenBlock = ((Block) JsonUtility.fromJson(result, type));
+                //result = HttpUtil.doPost(url,new Pairs("comand","getAllBlockChain"), new Pairs("last", "uuu"));
+                outStream.writeBytes("dump\n");
+                result = res.readLine();
+//                Type type;
+//                type = new TypeToken<Block>() {
+//                }.getType();
+//                lastGivenBlock = ((Block) JsonUtility.fromJson(result, type));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         //TODO Provare a scaricare da un secondo Peer e vedere se c'e' qualcosa di nuovo
-        if(lastGivenBlock != null){
-            lastBlock = lastGivenBlock;
-        }
-        url = "http://" + ipPeers.get(index) + ":" + 9100 + "/getAllTransactions";
-        result = "";
-        try {
-                result = HttpUtil.doGet(url);
-                Type type;
-                type = new TypeToken<Block>() {
-                }.getType();
-                lastGivenBlock = ((Block) JsonUtility.fromJson(result, type));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+//        if(lastGivenBlock != null){
+//            lastBlock = lastGivenBlock;
+//        }
+//        url = "http://" + ipPeers.get(index) + ":" + 9100 + "/getAllTransactions";
+//        result = "";
+//        try {
+//                result = HttpUtil.doGet(url);
+//                Type type;
+//                type = new TypeToken<Block>() {
+//                }.getType();
+//                lastGivenBlock = ((Block) JsonUtility.fromJson(result, type));
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
         
     }
     
