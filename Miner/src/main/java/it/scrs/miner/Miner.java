@@ -21,6 +21,7 @@ import java.util.Properties;
 import it.scrs.miner.models.Pairs;
 import it.scrs.miner.models.Transaction;
 import it.scrs.miner.util.DbSession;
+import it.scrs.p2p.MainP2P;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -53,7 +54,9 @@ public class Miner {
         //TODO avviare gui
 
         Miner miner = new Miner();
-        miner.loadBlockChain();
+        MainP2P prova = new MainP2P(9100);
+        prova.run();
+        //miner.loadBlockChain();
         //MinerGUI gui = new MinerGUI(miner);            
 
         //miner.loadNetworkConfig();
