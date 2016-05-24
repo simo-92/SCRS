@@ -40,10 +40,10 @@ public class MainP2P extends Thread {
                 String comando = inClient.readLine();
                 if (comando.equals("dump")) {
                     if (OsUtils.isWindows()) {
-                        String[] pp = new String[]{"cmd.exe", "/c", "mysqldump --host=localhost --user root --password=a30l10e90 --opt campusx > dump.sql"};
+                        String[] pp = new String[]{"cmd.exe", "/c", "mysqldump --host=localhost --user root --password=-- --opt campusx > dump.sql"};
                         Runtime.getRuntime().exec(pp);
                     } else {
-                        String[] pp = new String[]{"sh", "-c", "mysqldump --host=localhost --user root --password=a30l10e90 --opt campusx > dump.sql"};
+                        String[] pp = new String[]{"sh", "-c", "mysqldump --host=localhost --user root --password=-- --opt campusx > dump.sql"};
                         Runtime.getRuntime().exec(pp);
                     }
                     File myFile = new File("C:\\Users\\Alessandro\\Documents\\NetBeansProjects\\SCRS\\Miner\\dump.sql");
