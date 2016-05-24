@@ -97,7 +97,10 @@ public class Miner {
             try {
                 //result = HttpUtil.doPost(url,new Pairs("comand","getAllBlockChain"), new Pairs("last", "uuu"));
                 outStream.writeBytes("dump\n");
-                result = res.readLine();
+                while((result = res.readLine())!=null){
+                    System.out.println(result);
+                }
+                
 //                Type type;
 //                type = new TypeToken<Block>() {
 //                }.getType();
