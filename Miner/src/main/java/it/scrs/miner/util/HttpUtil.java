@@ -14,7 +14,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
-/**classe di utilita per effettuare richieste http verso il sistema legacy */
+
 public class HttpUtil {
     
     /**
