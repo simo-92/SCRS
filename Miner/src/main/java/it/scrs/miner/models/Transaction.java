@@ -28,9 +28,9 @@ public class Transaction {
     @JoinColumn(name="author")
     private User author;
    // private final int k= 50;
-    @ManyToOne
-    @JoinColumn(name="blockId")
-    private Block blockContainer; //è il blocco che contiene la transazione
+//    @ManyToOne
+//    @JoinColumn(name="blockId")
+    //private Block blockContainer; //è il blocco che contiene la transazione
     @OneToOne
     @JoinColumn(name="hashNextTransaction")
     private Transaction nextTransaction;
@@ -93,16 +93,16 @@ public class Transaction {
     /**
      * @return the blockContainer
      */
-    public Block getBlockContainer() {
-        return blockContainer;
-    }
-
-    /**
-     * @param blockContainer the blockContainer to set
-     */
-    public void setBlockContainer(Block blockContainer) {
-        this.blockContainer = blockContainer;
-    }
+//    public Block getBlockContainer() {
+//        return blockContainer;
+//    }
+//
+//    /**
+//     * @param blockContainer the blockContainer to set
+//     */
+//    public void setBlockContainer(Block blockContainer) {
+//        this.blockContainer = blockContainer;
+//    }
 
     /**
      * @return the nextTransaction

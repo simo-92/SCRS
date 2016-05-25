@@ -38,7 +38,8 @@ public class Block {
     private Block previuosBlock;
 //    @Column(name="hashPreviousBlock")
 //    private String hashPreviousBlock;
-    @OneToOne(mappedBy = "blockContainer")
+    @OneToOne
+    @Column(name="transactionContained")
     private Transaction transactionContained;
     
     @Column(name="minerPublickey")

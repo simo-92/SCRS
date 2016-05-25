@@ -5,7 +5,10 @@
  */
 package it.scrs.miner;
 
+import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import it.scrs.miner.dao.BlockDAO;
 import it.scrs.miner.gui.MinerGUI;
 import it.scrs.miner.models.Block;
@@ -50,12 +53,17 @@ public class Miner {
     private Block lastBlock;
     private List<Transaction> transactionsList;
     
+
     public static void main(String args[]) throws IOException{
         //TODO avviare gui
 
         Miner miner = new Miner();
-        MainP2P prova = new MainP2P(9100);
-        prova.run();
+        Criteria crit=DbSession.getSession().createCriteria(Block.class).add(Restrictions.eq("id", "pluto"));
+        Block block = (Block) crit.uniqueResult();
+        System.out.println(JsonUtility.toJson(block));
+        //Block b=BlockDAO.getBlockDAO().getLastBlock();
+        //MainP2P prova = new MainP2P(9100);
+        //prova.run();
         //miner.loadBlockChain();
         //MinerGUI gui = new MinerGUI(miner);            
 
