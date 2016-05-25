@@ -39,7 +39,7 @@ public class Block {
 //    @Column(name="hashPreviousBlock")
 //    private String hashPreviousBlock;
     @OneToOne
-    @Column(name="transactionContained")
+    @JoinColumn(name="transactionContained")
     private Transaction transactionContained;
     
     @Column(name="minerPublickey")

@@ -61,6 +61,7 @@ public class Miner {
         Criteria crit=DbSession.getSession().createCriteria(Block.class).add(Restrictions.eq("id", "pluto"));
         Block block = (Block) crit.uniqueResult();
         System.out.println(JsonUtility.toJson(block));
+        DbSession.destroyService();
         //Block b=BlockDAO.getBlockDAO().getLastBlock();
         //MainP2P prova = new MainP2P(9100);
         //prova.run();
